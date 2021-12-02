@@ -1,4 +1,4 @@
-from targets.base_target import BaseTarget
+from csvoffloader.targets.base_target import BaseTarget
 
 
 class PostgressTarget(BaseTarget):
