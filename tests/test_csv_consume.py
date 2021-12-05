@@ -5,9 +5,8 @@ from csvoffloader.targets.filesystem_target import FileSystemTarget
 
 
 class TestCSVConsume(IsolatedAsyncioTestCase):
-    def __init__(self):
-        super().__init__()
-        self.file_system_source = FileSystemSource(FileSystemTarget())
+    async def asyncSetUp(self) -> None:
+        self.file_system_source = FileSystemSource(FileSystemTarget(), "./test_source_files/test_source.json")
 
     async def test_csv_folder_consumption(self):
         await self.file_system_source.consume()

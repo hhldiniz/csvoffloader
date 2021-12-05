@@ -6,6 +6,7 @@ from typing import IO
 
 from csvoffloader.sources.base_source import BaseSource
 from csvoffloader.targets.base_target import BaseTarget
+from csvoffloader.utils.json_encoder import MyJsonEncoder
 
 
 class FileSystemSource(BaseSource):
@@ -33,4 +34,4 @@ class FileSystemSource(BaseSource):
 
     async def __offload_file(self, csv_file):
         csv_reader = csv.DictReader(csv_file)
-        await self.target.offload(json.dumps(csv_reader))
+        await self.target.offload(json.dumps(dict(list(csv_reader)[0]), cls=MyJsonEncoder))
